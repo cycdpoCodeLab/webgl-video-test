@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+  head
+    include includes/meta.pug
+    title Webgl Video Test
+
+    //- icon
+    link(rel="shortcut icon", href=require('../favicon.ico'))
+
+    include includes/compatible.pug
+
+    //- webpack style
+    each _style in htmlWebpackPlugin.files.css
+      link(href=_style, rel="stylesheet")
+
+  body
+    .main-screen
+      canvas#canvas(width="1280", height="720")
+
+    //- styles and scripts
+    span(style="display:none;")
+      //- webpack loading js
+      each _js,index in htmlWebpackPlugin.files.js
+        if index === 0
+          script(src=_js)
+
+      //- webpack main script
+      each _js,index in htmlWebpackPlugin.files.js
+        if index !== 0
+          script(src=_js)

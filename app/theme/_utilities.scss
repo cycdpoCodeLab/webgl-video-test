@@ -1,0 +1,31 @@
+@import "variables";
+@import "~@cycjimmy/sass-lib";
+
+@function calcVW($designDrawingLength:0) {
+  @return call(
+      get_function("designPx2VW"),
+      $designDrawingLength,
+      $designDrawingWidth
+  );
+}
+
+/**
+ * media query
+ * $media both maxW minW
+ */
+@mixin media-query($media) {
+  @if $media == handheld {
+    @media only screen and (max-width: $break-small) {
+      @content;
+    }
+  } @else if $media == mediumScreen {
+    @media only screen and (min-width: $break-small) and (max-width: $break-large) {
+      @content;
+    }
+  } @else if $media == wideScreen {
+    @media only screen and (min-width: $break-large) {
+      @content;
+    }
+  }
+}
+
