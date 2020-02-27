@@ -5,9 +5,12 @@ html(lang='en')
     title Webgl Video Test
 
     //- icon
-    link(rel="shortcut icon", href=require('../favicon.ico'))
+    link(rel="shortcut icon", href=require('../favicon.ico').default)
 
     include includes/compatible.pug
+
+    //- vconsole
+      include includes/vconsole
 
     //- webpack style
     each _style in htmlWebpackPlugin.files.css
@@ -15,14 +18,36 @@ html(lang='en')
 
   body
     .main-screen
-      canvas#canvas(width="1280", height="720")
+      h2 Video.js test (video)
+      #video-js
+
+      h2 VideoContext test (webgl)
+      canvas#video-context(width="1280", height="720")
+
+      h2 pixi.js test (webgl)
+      #pixi
 
     //- styles and scripts
     span(style="display:none;")
+      //- styles
+      //- webpack style
+      each _style,index in htmlWebpackPlugin.files.css
+        if index !== 0
+          link(href=_style, rel="stylesheet")
+
+      //- videoJs global style
+      link(href="https://cdn.jsdelivr.net/npm/video.js@6/dist/video-js.min.css", rel="stylesheet")
+
       //- webpack loading js
       each _js,index in htmlWebpackPlugin.files.js
         if index === 0
           script(src=_js)
+
+      //- video.js
+      script(src="https://cdn.jsdelivr.net/npm/video.js@7.6.6/dist/video.min.js")
+
+      //- pixi.js
+      script(src="https://cdn.jsdelivr.net/npm/pixi.js@5.2.1/dist/pixi.min.js")
 
       //- webpack main script
       each _js,index in htmlWebpackPlugin.files.js

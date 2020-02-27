@@ -21,29 +21,40 @@ body {
  * Main Frame
  *---------------------------*/
 .main-screen {
-  width: 90%;
-  min-width: 300px;
-  max-width: 960px;
-  margin: $space auto;
-  padding: $space;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 640px;
+  padding: 20px 0;
+  margin: 0 auto;
 
-  background-color: lighten($bgc, 4%);
-
-  // media queries
-  @include media-query(handheld) {
-    width: 95%;
-    margin: $space / 2 auto;
-    padding: $space / 2;
+  > h2 {
+    padding: 40px 0 20px;
   }
 }
 
-/*---------------------------
- * Other
- *---------------------------*/
-#canvas {
+#video-js,
+#video-context,
+#pixi {
+  display: block;
   width: 640px;
   height: 360px;
+}
+
+#video-js,
+#pixi {
+  @extend %rel;
+  background-color: black;
+  overflow: hidden;
+
+  &::after {
+    display: block;
+    content: '';
+    @extend %fullContainer;
+  }
+}
+
+#video-js {
+  video {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
 }

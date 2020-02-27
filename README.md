@@ -1,2 +1,2 @@
-# webgl-video-test
-webgl video test
+# video-test
+video test
